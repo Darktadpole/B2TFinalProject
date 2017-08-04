@@ -72,6 +72,22 @@ width: 200%;
  box-shadow: 2px 2px 2px black;
 }
 
+tbody
+{
+    counter-reset: rowNumber;
+}
+
+tbody tr > td:first-child
+{
+    counter-increment: rowNumber;
+}
+
+tbody tr td:first-child::before
+{
+    content: counter(rowNumber);
+    min-width: 1em;
+    margin-right: 0.5em;
+}
 
 div {text-align: center;
     margin: 0 auto; 
@@ -153,62 +169,55 @@ div {text-align: center;
       //create the array for customer orders
       var orders=[];
 
-      // varible for mumbers function fr()
+// varible for mumbers function fr()
       var a = "";
 
       // varible for customers function cr()
       var b = "";
 
 
-    //index for numbers array 
+      //index for numbers array 
       var i = 0;
 
-    //index for customers array 
+         //index for customers array 
       var i2 = 0;
 
 
 
-  //function to display customer position
-      function  fr(){
- if( i < numbers.length) {
-    a += numbers[i++] + " , ";
-    return numbers[i-1];
-  }
-  
-  }
 
 
-  //function to display customer name
-    function cr(){
+//function to display customer name
+function cr(){
 
-    if( i2 < customers.length) {
+if( i2 < customers.length) {
     b += customers[i2++] + " , ";
     return customers[i2-1] +" is served " + orders[i2-1];
   }
-  }
+
+}
 
 
 
-  //function to create new rows with cells and and to origninal table
+//function to create new rows with cells and and to origninal table
       function ins() {
 
-  //declare tbody
+//declare tbody
       var tbb = document.getElementById("tb");
  
-  //declare and assign the value of customer names input     
+ //declare and assign the value of customer names input     
       var data2 = document.getElementById("col1").value;
-  //add this value to customers name array
+      //add this value to customers name array
       customers.push(data2);
  
   //declare and assign the value of customer orders input      
       var data3 = document.getElementById("col2").value;
-  //add this value to customers order array
+        //add this value to customers order array
       orders.push(data3);
 
-  //hide the no customer row disapplear
+//hide the no customer row disapplear
       document.getElementById("tr2").style.display="none";
 
-  //create new row
+//create new row
    		var tr = document.createElement("tr");
 
   //create new cells x3 
@@ -216,53 +225,51 @@ div {text-align: center;
       var td2 = document.createElement("td");
       var td3 = document.createElement("td");
 
-      var nn2 = document.getElementById("tb").rows.length;
-      var n2= parseInt(nn2) + parseInt(1);
-      numbers.push(n2);
  
-  //declare columns for input customer postions          
-      td1.innerHTML = fr();
+ 
+ //declare columns for input customer postions          
+      td1.innerHTML = "";
 
  //declare columns for input customer names      
       td2.innerHTML = data2;
 
-  //declare columns for input customer orders      
+ //declare columns for input customer orders      
       td3.innerHTML = data3;
 
-  //add new cells to new row x3      
+//add new cells to new row x3      
       tr.appendChild(td1);
       tr.appendChild(td2);
       tr.appendChild(td3);
 
-  //add new row to tbody      
+//add new row to tbody      
       tbb.appendChild(tr);
 
-  //text holder for display no customer waiting
+//text holder for display no customer waiting
       document.getElementById("ppp").innerHTML = ""
   }
       
 
 
-  //function to delete first customers
-      function del(){
+//function to delete first customers
+function del(){
 
-  //delete 1st customer data
-     document.getElementById('tb').deleteRow(0);
+//delete 1st customer data
+  document.getElementById('tb').deleteRow(0);
 
   //call the customer name who is served function 
-     document.getElementById("ppp").innerHTML = cr();
-  //tbody rows
-     var nn2 = document.getElementById("tb").rows.length;
+  document.getElementById("ppp").innerHTML = cr();
+//tbody rows
+  var nn2 = document.getElementById("tb").rows.length;
  
 
-  //for rows in tbody is 0,display the hided row 
-    if (nn2 ==0){
-    document.getElementById("tr2").style.display="";
+//for rows in tbody is 0,display the hided row 
+   if (nn2 ==0){
+  document.getElementById("tr2").style.display="";
   //print out no customer waiting
-    document.getElementById("ppp").innerHTML = "There is nobody waiting to be served!";
-     }
+  document.getElementById("ppp").innerHTML = "There is nobody waiting to be served!";
+ }
 
-    }
+}
 
          
 </script>
